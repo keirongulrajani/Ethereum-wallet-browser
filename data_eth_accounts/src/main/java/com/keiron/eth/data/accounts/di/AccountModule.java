@@ -5,6 +5,7 @@ import com.keiron.eth.data.accounts.client.AccountClient;
 import com.keiron.eth.data.accounts.datasource.AccountDataSource;
 import com.keiron.eth.data.accounts.repository.AccountRepositoryImpl;
 import com.keiron.eth.domain.accounts.repository.AccountRepository;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
@@ -17,7 +18,7 @@ import javax.inject.Named;
 
 @Module
 public class AccountModule {
-    private static final String BASE_URL = "https://api.etherscan.io/api?";
+    private static final String BASE_URL = "https://api.etherscan.io/";
     public static final String API_KEY = "api key";
 
     @Provides
