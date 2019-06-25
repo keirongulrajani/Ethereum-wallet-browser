@@ -1,0 +1,31 @@
+package com.keiron.eth.library.common.mapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class BaseMapperToPresentation<SOURCE, TARGET> {
+
+    /**
+     * Transforms a type into another
+     *
+     * @param toBeTransformed source that will be transformed
+     * @return the transformed object
+     */
+    public abstract TARGET mapToPresentation(SOURCE toBeTransformed);
+
+    /**
+     * Transforms a list of types into another type
+     *
+     * @param list list of sources that will be transformed
+     * @return the list of transformed objects
+     */
+    public List<TARGET> mapToPresentation(List<SOURCE> list) {
+        List targetList = new ArrayList<TARGET>();
+
+        for (SOURCE source : list) {
+            targetList.add(mapToPresentation(source));
+        }
+
+        return targetList;
+    }
+}

@@ -1,0 +1,80 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+
+def staticAnalysisSource = '.'
+def staticAnalysisIncludeFiles = '**/*.java'
+def staticAnalysisExcludeFiles = ['**/R.java',
+                                  '**/BuildConfig.java',
+                                  '**/gen/**',
+                                  '**/tests/**',
+                                  '**/androidTest/**',
+                                  '**/test/**',
+                                  '**/apt/**',
+                                  '**/build/**']
+
+checkstyle {
+    toolVersion Versions.checkstyle
+}
+
+task checkstyle(type: Checkstyle) {
+    description 'Run checkstyle'
+    group 'verification'
+    ignoreFailures = false
+
+    configFile file("$rootDir/app/quality/checkstyle/checkstyle.xml")
+    configProperties.checkstyleSuppressionsPath = file("$rootDir/app/quality/checkstyle/checkstyle_suppressions.xml").absolutePath
+
+    classpath = files()
+
+    source staticAnalysisSource
+    include staticAnalysisIncludeFiles
+    exclude staticAnalysisExcludeFiles
+}
+
+task pmd(type: Pmd) {
+    description 'Run pmd'
+    group 'verification'
+    ignoreFailures = false
+
+    ruleSetFiles = files("$rootDir/app/quality/pmd/pmd_config.xml")
+    ruleSets = []
+    rulePriority = 4
+
+    source staticAnalysisSource
+    include staticAnalysisIncludeFiles
+    exclude staticAnalysisExcludeFiles
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+configurations {
+    ktlint
+}
+
+task ktlint(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "app/**/*.kt", "data_*/**/*.kt", "domain_*/**/*.kt", "library_*/**/*.kt", "ui-components/**/*.kt", "test-*/**/*.kt", "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+    // see https://github.com/shyiko/ktlint#usage for more
+}
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Fix Kotlin code style deviations."
+    classpath = configurations.ktlint
+    main = "com.github.shyiko.ktlint.Main"
+    args "-F", "app/**/*.kt", "data_*/**/*.kt", "domain_*/**/*.kt", "library_*/**/*.kt", "ui-components/**/*.kt", "test-*/**/*.kt"
+}
+
+task staticAnalysis(type: GradleBuild) {
+    description "Helper task to run all static analysis tasks"
+    tasks = ["checkstyle", "ktlint"]
+}
+
+dependencies {
+    checkstyle QualityDependencies.checkstyle
+    ktlint QualityDependencies.ktlint
+}

@@ -1,0 +1,1 @@
+include ':app', ':data_eth_accounts', ':library_common', ':library_network', ':domain_eth_accounts', ':domain_common', ':uicomponents', ':data_conversion', ':domain_conversion'

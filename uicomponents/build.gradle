@@ -1,0 +1,10 @@
+apply from: "${rootDir}/buildsystem/android_library.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation MainApplicationDependencies.appCompat
+    implementation MainApplicationDependencies.recyclerView
+
+    implementation project(path: ':library_common')
+}

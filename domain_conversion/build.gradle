@@ -1,0 +1,10 @@
+apply from: "${rootDir}/buildsystem/android_library.gradle"
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Library
+    implementation project(path: ':library_common')
+    implementation project(path: ':domain_common')
+}

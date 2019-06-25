@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ETH smart contract test</string>
+    <string name="erc20_tokens_details_title">ERC-20 Tokens</string>
+</resources>

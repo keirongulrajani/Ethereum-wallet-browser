@@ -1,0 +1,57 @@
+/**
+ * Configurations for the Android Plugin
+ *
+ * http://google.github.io/android-gradle-dsl/current/
+ */
+android {
+    compileSdkVersion rootProject.ext.compile_sdk
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.min_sdk
+        targetSdkVersion rootProject.ext.target_sdk
+
+        versionCode rootProject.ext.version_code
+        versionName rootProject.ext.version_name
+
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+    }
+
+    lintOptions {
+        abortOnError true
+        warningsAsErrors true
+    }
+
+    dexOptions {
+        javaMaxHeapSize "2g"
+        jumboMode true
+        preDexLibraries true
+    }
+
+    testOptions {
+        animationsDisabled = true
+
+        unitTests {
+            includeAndroidResources true
+            returnDefaultValues = true
+        }
+    }
+
+    configurations.all { config ->
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            if (details.requested.group == "androidx.appcompat:appcompat" && !details.requested.name.contains("multidex")) {
+                details.useVersion Versions.appCompat
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}

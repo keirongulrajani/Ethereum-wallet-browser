@@ -1,0 +1,16 @@
+/**
+ * Default configurations for java modules
+ */
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+apply from: "${rootDir}/buildsystem/project_shared.gradle"
+
+compileKotlin {
+    kotlinOptions.allWarningsAsErrors = true
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+sourceSets.main.java.srcDir file("$buildDir/generated/source/kapt/")
