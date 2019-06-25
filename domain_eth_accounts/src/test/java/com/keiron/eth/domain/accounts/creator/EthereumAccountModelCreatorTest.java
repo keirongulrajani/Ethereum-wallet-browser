@@ -1,7 +1,7 @@
 package com.keiron.eth.domain.accounts.creator;
 
 import com.keiron.eth.domain.common.model.EthereumAccount;
-import com.keiron.eth.domain.common.model.SmartContractAccount;
+import com.keiron.eth.domain.common.model.TokenAccount;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,14 +28,14 @@ public class EthereumAccountModelCreatorTest {
         String address = "address";
         BigDecimal balance = new BigDecimal(123456);
         BigDecimal smartContractBalance = new BigDecimal(654321);
-        List<SmartContractAccount> smartContractAccounts = Collections.singletonList(mock(SmartContractAccount.class));
+        List<TokenAccount> tokenAccounts = Collections.singletonList(mock(TokenAccount.class));
         // When
         EthereumAccount ethereumAccount = classUnderTest.create(new EthereumAccountModelCreator.Params(address, balance, smartContractBalance,
-                smartContractAccounts));
+                tokenAccounts));
         // Then
         assertEquals(address, ethereumAccount.getAddress());
         assertEquals(balance, ethereumAccount.getBalance());
-        assertEquals(smartContractBalance, ethereumAccount.getSmartContractBalance());
-        assertEquals(smartContractAccounts, ethereumAccount.getSmartContractAccounts());
+        assertEquals(smartContractBalance, ethereumAccount.getTokenBalance());
+        assertEquals(tokenAccounts, ethereumAccount.getTokenAccounts());
     }
 }

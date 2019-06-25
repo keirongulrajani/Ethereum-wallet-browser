@@ -6,5 +6,5 @@ import java.math.BigDecimal;
 
 public interface ConversionRepository {
 
-    Single<BigDecimal> getConversionRateForEthPair(String smartContractSymbol);
+    Single<BigDecimal> getConversionRateForEthPair(String tokenSymbol);
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import com.keiron.eth.library.common.schedulers.SchedulersProvider;
 import com.keiron.eth.smartcontracttest.BuildConfig;
-import com.keiron.eth.smartcontracttest.application.EthSmartContractTestApplication;
+import com.keiron.eth.smartcontracttest.application.EthereumTokenApplication;
 import com.keiron.eth.smartcontracttest.schedulers.SchedulersProviderImpl;
 import dagger.Module;
 import dagger.Provides;
@@ -21,8 +21,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    EthSmartContractTestApplication provideApplication(Application application) {
-        return ((EthSmartContractTestApplication) application);
+    EthereumTokenApplication provideApplication(Application application) {
+        return ((EthereumTokenApplication) application);
     }
 
     @Provides

@@ -8,21 +8,21 @@ import io.reactivex.Single;
 
 import javax.inject.Inject;
 
-public class GetEthExchangeRateForSmartContractUseCase extends UseCase<String, Single<ExchangeRate>> {
+public class GetEthExchangeRateForTokenUseCase extends UseCase<String, Single<ExchangeRate>> {
 
     private ConversionRepository conversionRepository;
     private ExchangeRateModelCreator exchangeRateModelCreator;
 
     @Inject
-    public GetEthExchangeRateForSmartContractUseCase(ConversionRepository conversionRepository,
-                                                     ExchangeRateModelCreator exchangeRateModelCreator) {
+    public GetEthExchangeRateForTokenUseCase(ConversionRepository conversionRepository,
+                                             ExchangeRateModelCreator exchangeRateModelCreator) {
         this.conversionRepository = conversionRepository;
         this.exchangeRateModelCreator = exchangeRateModelCreator;
     }
 
     @Override
-    public Single<ExchangeRate> buildUseCase(String smartContractSymbol) {
-        return conversionRepository.getConversionRateForEthPair(smartContractSymbol)
-                .map(rate -> exchangeRateModelCreator.create(new ExchangeRateModelCreator.Params(smartContractSymbol, rate)));
+    public Single<ExchangeRate> buildUseCase(String tokenSymbol) {
+        return conversionRepository.getConversionRateForEthPair(tokenSymbol)
+                .map(rate -> exchangeRateModelCreator.create(new ExchangeRateModelCreator.Params(tokenSymbol, rate)));
     }
 }

@@ -8,18 +8,18 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import javax.inject.Inject;
 import java.math.BigDecimal;
 
-public class GetSmartContractAccountBalanceUseCase extends UseCase<GetSmartContractAccountBalanceUseCase.Params, Single<BigDecimal>> {
+public class GetTokenAccountBalanceUseCase extends UseCase<GetTokenAccountBalanceUseCase.Params, Single<BigDecimal>> {
 
     private AccountRepository accountRepository;
 
     @Inject
-    public GetSmartContractAccountBalanceUseCase(AccountRepository accountRepository) {
+    public GetTokenAccountBalanceUseCase(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
     @Override
     public Single<BigDecimal> buildUseCase(Params params) {
-        return accountRepository.getSmartContractAccountBalance(params.contractAddress, params.address);
+        return accountRepository.getTokenAccountBalance(params.contractAddress, params.address);
     }
 
     public static class Params {

@@ -12,18 +12,18 @@ import java.math.BigDecimal;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class GetSmartContractAccountBalanceUseCaseTest {
+public class GetTokenAccountBalanceUseCaseTest {
 
     @Mock
     private AccountRepository accountRepository;
 
-    private GetSmartContractAccountBalanceUseCase classUnderTest;
+    private GetTokenAccountBalanceUseCase classUnderTest;
 
     @Before
     public void setUp() {
         initMocks(this);
 
-        classUnderTest = new GetSmartContractAccountBalanceUseCase(accountRepository);
+        classUnderTest = new GetTokenAccountBalanceUseCase(accountRepository);
     }
 
     @Test
@@ -32,10 +32,10 @@ public class GetSmartContractAccountBalanceUseCaseTest {
         String address = "address";
         String contractAddress = "contract address";
         BigDecimal expectedValue = new BigDecimal(1234);
-        when(accountRepository.getSmartContractAccountBalance(contractAddress, address)).thenReturn(Single.just(expectedValue));
+        when(accountRepository.getTokenAccountBalance(contractAddress, address)).thenReturn(Single.just(expectedValue));
 
         // When
-        TestObserver<BigDecimal> testObserver = classUnderTest.buildUseCase(new GetSmartContractAccountBalanceUseCase.Params(contractAddress, address)).test();
+        TestObserver<BigDecimal> testObserver = classUnderTest.buildUseCase(new GetTokenAccountBalanceUseCase.Params(contractAddress, address)).test();
 
         // Then
         testObserver.assertComplete().assertNoErrors().assertValue(expectedValue);

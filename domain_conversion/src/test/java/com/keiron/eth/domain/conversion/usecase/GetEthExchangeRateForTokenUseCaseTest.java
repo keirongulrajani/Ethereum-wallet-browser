@@ -15,18 +15,18 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class GetEthExchangeRateForSmartContractUseCaseTest {
+public class GetEthExchangeRateForTokenUseCaseTest {
     @Mock
     private ConversionRepository conversionRepository;
     @Mock
     private ExchangeRateModelCreator exchangeRateModelCreator;
 
-    private GetEthExchangeRateForSmartContractUseCase classUnderTest;
+    private GetEthExchangeRateForTokenUseCase classUnderTest;
 
     @Before
     public void setUp() {
         initMocks(this);
-        classUnderTest = new GetEthExchangeRateForSmartContractUseCase(conversionRepository, exchangeRateModelCreator);
+        classUnderTest = new GetEthExchangeRateForTokenUseCase(conversionRepository, exchangeRateModelCreator);
     }
 
     @Test

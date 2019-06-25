@@ -2,8 +2,8 @@ package com.keiron.eth.data.accounts.repository;
 
 import com.keiron.eth.data.accounts.datasource.AccountDataSource;
 import com.keiron.eth.data.accounts.mapper.AccountBalanceDtoToBigDecimalMapper;
-import com.keiron.eth.data.accounts.mapper.SmartContractDtoToSmartContractMapper;
-import com.keiron.eth.domain.accounts.model.SmartContract;
+import com.keiron.eth.data.accounts.mapper.TokenDtoToTokenMapper;
+import com.keiron.eth.domain.accounts.model.Token;
 import com.keiron.eth.domain.accounts.repository.AccountRepository;
 import io.reactivex.Single;
 
@@ -15,15 +15,15 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     private AccountDataSource accountDataSource;
     private AccountBalanceDtoToBigDecimalMapper accountBalanceDtoToBigDecimalMapper;
-    private SmartContractDtoToSmartContractMapper smartContractDtoToSmartContractMapper;
+    private TokenDtoToTokenMapper tokenDtoToTokenMapper;
 
     @Inject
     public AccountRepositoryImpl(AccountDataSource accountDataSource,
                                  AccountBalanceDtoToBigDecimalMapper accountBalanceDtoToBigDecimalMapper,
-                                 SmartContractDtoToSmartContractMapper smartContractDtoToSmartContractMapper) {
+                                 TokenDtoToTokenMapper tokenDtoToTokenMapper) {
         this.accountDataSource = accountDataSource;
         this.accountBalanceDtoToBigDecimalMapper = accountBalanceDtoToBigDecimalMapper;
-        this.smartContractDtoToSmartContractMapper = smartContractDtoToSmartContractMapper;
+        this.tokenDtoToTokenMapper = tokenDtoToTokenMapper;
     }
 
     @Override
@@ -33,14 +33,14 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Single<BigDecimal> getSmartContractAccountBalance(String contractAddress, String address) {
-        return accountDataSource.getSmartContractAccountBalanceForAddress(contractAddress, address)
+    public Single<BigDecimal> getTokenAccountBalance(String contractAddress, String address) {
+        return accountDataSource.getTokenAccountBalanceForAddress(contractAddress, address)
                 .map(accountBalanceDto -> accountBalanceDtoToBigDecimalMapper.mapToDomain(accountBalanceDto));
     }
 
     @Override
-    public Single<List<SmartContract>> getListOfSupportedContracts() {
-        return accountDataSource.getListOfSupportedContracts()
-                .map(smartContractDtos -> smartContractDtoToSmartContractMapper.mapToDomain(smartContractDtos));
+    public Single<List<Token>> getListOfSupportedTokens() {
+        return accountDataSource.getListOfSupportedTokens()
+                .map(tokenDtos -> tokenDtoToTokenMapper.mapToDomain(tokenDtos));
     }
 }

@@ -1,12 +1,12 @@
 package com.keiron.eth.domain.accounts.model;
 
-public class SmartContract {
+public class Token {
 
     private final String address;
     private String name;
     private final String symbol;
 
-    public SmartContract(String address, String name, String symbol) {
+    public Token(String address, String name, String symbol) {
         this.address = address;
         this.name = name;
         this.symbol = symbol;

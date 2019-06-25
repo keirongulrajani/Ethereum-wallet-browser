@@ -3,6 +3,7 @@ package com.keiron.eth.smartcontracttest.di.viewmodel;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import com.keiron.eth.smartcontracttest.screens.main.MainViewModel;
+import com.keiron.eth.smartcontracttest.screens.tokens.TokenAccountViewModel;
 import com.keiron.eth.uicomponents.viewmodel.ViewModelProviderFactory;
 import dagger.Binds;
 import dagger.Module;
@@ -15,6 +16,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel.class)
     abstract ViewModel bindMainViewModel(MainViewModel mainViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TokenAccountViewModel.class)
+    abstract ViewModel bindSmartContractAccountViewModel(TokenAccountViewModel tokenAccountViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelProviderFactory factory);

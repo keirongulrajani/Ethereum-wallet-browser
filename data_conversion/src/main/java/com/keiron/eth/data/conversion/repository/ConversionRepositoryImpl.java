@@ -21,8 +21,8 @@ public class ConversionRepositoryImpl implements ConversionRepository {
     }
 
     @Override
-    public Single<BigDecimal> getConversionRateForEthPair(String smartContractSymbol) {
-        return conversionDataSource.getConversionRateForEthPair(smartContractSymbol)
+    public Single<BigDecimal> getConversionRateForEthPair(String tokenSymbol) {
+        return conversionDataSource.getConversionRateForEthPair(tokenSymbol)
                 .map(conversionRateDto -> conversionRateDtoToBigDecimalMapper.mapToDomain(conversionRateDto));
     }
 }

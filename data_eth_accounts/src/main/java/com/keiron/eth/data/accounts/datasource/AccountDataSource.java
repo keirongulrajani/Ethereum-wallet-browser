@@ -2,7 +2,7 @@ package com.keiron.eth.data.accounts.datasource;
 
 import com.keiron.eth.data.accounts.client.AccountClient;
 import com.keiron.eth.data.accounts.model.AccountBalanceDto;
-import com.keiron.eth.data.accounts.model.SmartContractDto;
+import com.keiron.eth.data.accounts.model.TokenDto;
 import io.reactivex.Single;
 
 import java.util.Arrays;
@@ -22,11 +22,11 @@ public class AccountDataSource {
         return accountClient.getAccountBalanceForAddress(address, apiKey);
     }
 
-    public Single<AccountBalanceDto> getSmartContractAccountBalanceForAddress(String contractAddress, String address) {
+    public Single<AccountBalanceDto> getTokenAccountBalanceForAddress(String contractAddress, String address) {
         return accountClient.getAccountTokenBalanceForAddress(contractAddress, address, apiKey);
     }
 
-    public Single<List<SmartContractDto>> getListOfSupportedContracts() {
-        return Single.just(Arrays.asList(SmartContractDto.values()));
+    public Single<List<TokenDto>> getListOfSupportedTokens() {
+        return Single.just(Arrays.asList(TokenDto.values()));
     }
 }

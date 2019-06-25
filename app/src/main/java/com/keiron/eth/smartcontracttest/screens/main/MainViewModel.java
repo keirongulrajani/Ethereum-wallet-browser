@@ -6,7 +6,9 @@ import com.keiron.eth.library.common.schedulers.SchedulersProvider;
 import com.keiron.eth.smartcontracttest.screens.main.mapper.EthereumAccountToMainUiModelMapper;
 import com.keiron.eth.smartcontracttest.screens.main.model.MainUiModel;
 import com.keiron.eth.smartcontracttest.screens.main.model.MainViewState;
+import com.keiron.eth.smartcontracttest.screens.tokens.model.TokenAccountsDetailsNavigationParameters;
 import com.keiron.eth.uicomponents.viewmodel.BaseViewModel;
+import com.keiron.eth.uicomponents.viewmodel.SingleLiveEvent;
 import io.reactivex.disposables.Disposable;
 
 import javax.inject.Inject;
@@ -16,7 +18,9 @@ public class MainViewModel extends BaseViewModel {
     private GetEthereumAccountUseCase getEthereumAccountUseCase;
     private EthereumAccountToMainUiModelMapper ethereumAccountToMainUiModelMapper;
     private SchedulersProvider schedulersProvider;
+
     MutableLiveData<MainViewState> mainViewState = new MutableLiveData<>();
+    SingleLiveEvent<TokenAccountsDetailsNavigationParameters> navigationEvent = new SingleLiveEvent<>();
 
     @Inject
     public MainViewModel(GetEthereumAccountUseCase getEthereumAccountUseCase,
@@ -50,5 +54,9 @@ public class MainViewModel extends BaseViewModel {
     private MainViewState createDataState(MainUiModel uiModel) {
         return new MainViewState(false, MainViewState.Error.NONE, uiModel);
 
+    }
+
+    public void onViewMoreClicked(String ethAddress) {
+        navigationEvent.postValue(new TokenAccountsDetailsNavigationParameters(ethAddress));
     }
 }

@@ -52,7 +52,7 @@ public class AccountDataSourceTest {
         when(accountClient.getAccountTokenBalanceForAddress(contractAddress, address, API_KEY)).thenReturn(Single.just(accountBalanceDto));
 
         // When
-        TestObserver<AccountBalanceDto> testObserver = classUnderTest.getSmartContractAccountBalanceForAddress(contractAddress, address).test();
+        TestObserver<AccountBalanceDto> testObserver = classUnderTest.getTokenAccountBalanceForAddress(contractAddress, address).test();
 
         // Then
         verify(accountClient).getAccountTokenBalanceForAddress(contractAddress, address, API_KEY);

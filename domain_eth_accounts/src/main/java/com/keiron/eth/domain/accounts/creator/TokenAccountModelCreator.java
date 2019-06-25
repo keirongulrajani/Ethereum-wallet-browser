@@ -1,20 +1,20 @@
 package com.keiron.eth.domain.accounts.creator;
 
-import com.keiron.eth.domain.common.model.SmartContractAccount;
+import com.keiron.eth.domain.common.model.TokenAccount;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
 
-public class SmartContractAccountModelCreator {
+public class TokenAccountModelCreator {
 
     @Inject
-    public SmartContractAccountModelCreator() {
+    public TokenAccountModelCreator() {
     }
 
-    public SmartContractAccount create(SmartContractAccountModelCreator.Params params) {
-        return new SmartContractAccount(params.address, params.contractAddress, params.balance, params.name, params.symbol, params.rate);
+    public TokenAccount create(TokenAccountModelCreator.Params params) {
+        return new TokenAccount(params.address, params.contractAddress, params.balance, params.name, params.symbol, params.rate);
     }
 
     public static class Params {

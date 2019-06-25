@@ -7,18 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.google.android.material.textfield.TextInputEditText;
 import com.keiron.eth.smartcontracttest.R;
 import com.keiron.eth.smartcontracttest.di.application.ApplicationComponentHolder;
 import com.keiron.eth.smartcontracttest.screens.main.model.MainUiModel;
 import com.keiron.eth.smartcontracttest.screens.main.model.MainViewState;
+import com.keiron.eth.smartcontracttest.screens.tokens.TokenAccountsFragment;
+import com.keiron.eth.smartcontracttest.screens.tokens.model.TokenAccountsDetailsNavigationParameters;
 import com.keiron.eth.smartcontracttest.view.LoadingView;
 import com.keiron.eth.uicomponents.viewmodel.ViewModelProviderFactory;
 
@@ -36,6 +38,8 @@ public class MainFragment extends Fragment {
     private TextInputEditText addressInput;
     private TextView accountBalanceValue;
     private TextView tokenBalanceValue;
+    private Button viewMoreButton;
+    private String ethAddress;
 
 
     @Override
@@ -46,6 +50,19 @@ public class MainFragment extends Fragment {
 
         mainViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(MainViewModel.class);
         mainViewModel.mainViewState.observe(this, mainViewState -> onMainViewStateChanged(mainViewState));
+        mainViewModel.navigationEvent.observe(this, new Observer<TokenAccountsDetailsNavigationParameters>() {
+            @Override
+            public void onChanged(TokenAccountsDetailsNavigationParameters tokenAccountsDetailsNavigationParameters) {
+                navigateToSmartContractAccounts(tokenAccountsDetailsNavigationParameters);
+            }
+        });
+    }
+
+    private void navigateToSmartContractAccounts(TokenAccountsDetailsNavigationParameters tokenAccountsDetailsNavigationParameters) {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.parent, TokenAccountsFragment.newInstance(tokenAccountsDetailsNavigationParameters))
+                .addToBackStack(null)
+                .commit();
     }
 
     @Nullable
@@ -60,6 +77,13 @@ public class MainFragment extends Fragment {
         progressView = view.findViewById(R.id.progress);
         errorText = view.findViewById(R.id.errorText);
         container = view.findViewById(R.id.container);
+        viewMoreButton = view.findViewById(R.id.viewMoreButton);
+
+        viewMoreButton.setOnClickListener(v -> {
+            if (!ethAddress.isEmpty()) {
+                mainViewModel.onViewMoreClicked(ethAddress);
+            }
+        });
 
         accountBalanceValue = view.findViewById(R.id.accountBalanceValue);
         tokenBalanceValue = view.findViewById(R.id.tokenBalanceValue);
@@ -70,7 +94,8 @@ public class MainFragment extends Fragment {
 
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 hideKeyboard();
-                mainViewModel.onEthAddressSubmitted(addressInput.getText().toString());
+                ethAddress = addressInput.getText().toString();
+                mainViewModel.onEthAddressSubmitted(ethAddress);
                 return true;
             }
             return false;
@@ -119,4 +144,5 @@ public class MainFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 }

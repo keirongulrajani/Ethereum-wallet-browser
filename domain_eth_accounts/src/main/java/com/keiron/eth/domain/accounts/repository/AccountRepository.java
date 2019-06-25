@@ -1,6 +1,6 @@
 package com.keiron.eth.domain.accounts.repository;
 
-import com.keiron.eth.domain.accounts.model.SmartContract;
+import com.keiron.eth.domain.accounts.model.Token;
 import io.reactivex.Single;
 
 import java.math.BigDecimal;
@@ -10,7 +10,7 @@ public interface AccountRepository {
 
     Single<BigDecimal> getAccountBalance(String address);
 
-    Single<BigDecimal> getSmartContractAccountBalance(String contractAddress, String address);
+    Single<BigDecimal> getTokenAccountBalance(String contractAddress, String address);
 
-    Single<List<SmartContract>> getListOfSupportedContracts();
+    Single<List<Token>> getListOfSupportedTokens();
 }

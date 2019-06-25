@@ -8,6 +8,7 @@ import com.keiron.eth.library.common.schedulers.SchedulersProvider;
 import com.keiron.eth.smartcontracttest.screens.main.mapper.EthereumAccountToMainUiModelMapper;
 import com.keiron.eth.smartcontracttest.screens.main.model.MainUiModel;
 import com.keiron.eth.smartcontracttest.screens.main.model.MainViewState;
+import com.keiron.eth.smartcontracttest.screens.tokens.model.TokenAccountsDetailsNavigationParameters;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 import org.junit.Before;
@@ -34,6 +35,8 @@ public class MainViewModelTest {
     private SchedulersProvider schedulersProvider;
     @Mock
     private Observer<MainViewState> mainViewStateObserver;
+    @Mock
+    private Observer<TokenAccountsDetailsNavigationParameters> navigationEventObserver;
 
     private MainViewModel classUnderTest;
 
@@ -47,6 +50,7 @@ public class MainViewModelTest {
         classUnderTest = new MainViewModel(getEthereumAccountUseCase, ethereumAccountToMainUiModelMapper, schedulersProvider);
 
         classUnderTest.mainViewState.observeForever(mainViewStateObserver);
+        classUnderTest.navigationEvent.observeForever(navigationEventObserver);
     }
 
     @Test
@@ -97,7 +101,6 @@ public class MainViewModelTest {
     public void givenUnsuccessfulLoadThenObserveLoadingAndErrorViewStates() {
         // Given
         String address = "address";
-        EthereumAccount ethereumAccount = mock(EthereumAccount.class);
         when(getEthereumAccountUseCase.buildUseCase(address)).thenReturn(Single.error(new Throwable()));
 
         // When
@@ -116,5 +119,18 @@ public class MainViewModelTest {
         assertFalse(viewStateSuccess.isLoading());
         assertTrue(viewStateSuccess.getError() instanceof MainViewState.Error.NetworkIssue);
         assertNull(viewStateSuccess.getMainUiModel());
+    }
+
+    @Test
+    public void givenEthAddressWhenViewMoreClickedThenFiresNavigationEvent() {
+        // Given
+        String address = "address";
+        // When
+        classUnderTest.onViewMoreClicked(address);
+
+        // Then
+        ArgumentCaptor<TokenAccountsDetailsNavigationParameters> argumentCaptor = ArgumentCaptor.forClass(TokenAccountsDetailsNavigationParameters.class);
+        verify(navigationEventObserver).onChanged(argumentCaptor.capture());
+        assertEquals(address, argumentCaptor.getValue().getAddress());
     }
 }

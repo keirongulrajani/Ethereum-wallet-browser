@@ -7,6 +7,7 @@ import com.keiron.eth.data.conversion.di.ConversionModule;
 import com.keiron.eth.library.network.di.NetworkModule;
 import com.keiron.eth.smartcontracttest.di.viewmodel.ViewModelModule;
 import com.keiron.eth.smartcontracttest.screens.main.MainFragment;
+import com.keiron.eth.smartcontracttest.screens.tokens.TokenAccountsFragment;
 import dagger.BindsInstance;
 import dagger.Component;
 
@@ -31,6 +32,8 @@ public interface ApplicationComponent {
     }
 
     void inject(MainFragment mainFragment);
+
+    void inject(TokenAccountsFragment tokenAccountsFragment);
 
     Map<Class<? extends ViewModel>, Provider<ViewModel>> creators();
 }

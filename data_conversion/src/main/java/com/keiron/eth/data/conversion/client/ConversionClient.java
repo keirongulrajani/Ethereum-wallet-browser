@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 public interface ConversionClient {
 
 
-    @GET("/marketinfo/{smartContractSymbol}_ETH")
-    Single<ConversionRateDto> getConversionRateForEthPair(@Path(value = "smartContractSymbol") String smartContractSymbol);
+    @GET("/marketinfo/{tokenSymbol}_ETH")
+    Single<ConversionRateDto> getConversionRateForEthPair(@Path(value = "tokenSymbol") String tokenSymbol);
 
 }

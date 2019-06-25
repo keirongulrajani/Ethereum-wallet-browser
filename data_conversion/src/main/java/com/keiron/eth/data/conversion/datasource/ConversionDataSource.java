@@ -16,7 +16,7 @@ public class ConversionDataSource {
         this.conversionClient = conversionClient;
     }
 
-    public Single<ConversionRateDto> getConversionRateForEthPair(String smartContractSymbol) {
-        return conversionClient.getConversionRateForEthPair(smartContractSymbol);
+    public Single<ConversionRateDto> getConversionRateForEthPair(String tokenSymbol) {
+        return conversionClient.getConversionRateForEthPair(tokenSymbol);
     }
 }

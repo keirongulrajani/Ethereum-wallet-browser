@@ -2,7 +2,7 @@ package com.keiron.eth.domain.common.model;
 
 import java.math.BigDecimal;
 
-public class SmartContractAccount {
+public class TokenAccount {
 
     private final String address;
     private String contractAddress;
@@ -11,7 +11,7 @@ public class SmartContractAccount {
     private final String symbol;
     private BigDecimal rate;
 
-    public SmartContractAccount(String address, String contractAddress, BigDecimal balance, String name, String symbol, BigDecimal rate) {
+    public TokenAccount(String address, String contractAddress, BigDecimal balance, String name, String symbol, BigDecimal rate) {
         this.address = address;
         this.contractAddress = contractAddress;
         this.balance = balance;
