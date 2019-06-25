@@ -1,23 +1,21 @@
 package com.keiron.eth.smartcontracttest.screens.main.model;
 
-import java.math.BigDecimal;
-
 public class MainUiModel {
     private String address;
-    private final BigDecimal ethBalance;
-    private final BigDecimal tokenBalance;
+    private final String ethBalance;
+    private final String tokenBalance;
 
-    public MainUiModel(String address, BigDecimal ethBalance, BigDecimal tokenBalance) {
+    public MainUiModel(String address, String ethBalance, String tokenBalance) {
         this.address = address;
         this.ethBalance = ethBalance;
         this.tokenBalance = tokenBalance;
     }
 
-    public BigDecimal getEthBalance() {
+    public String getEthBalance() {
         return ethBalance;
     }
 
-    public BigDecimal getTokenBalance() {
+    public String getTokenBalance() {
         return tokenBalance;
     }
 

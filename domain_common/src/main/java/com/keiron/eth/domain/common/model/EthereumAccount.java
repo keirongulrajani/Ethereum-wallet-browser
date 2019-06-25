@@ -6,11 +6,13 @@ import java.util.List;
 public class EthereumAccount {
     private final String address;
     private final BigDecimal balance;
+    private BigDecimal smartContractBalance;
     private List<SmartContractAccount> smartContractAccounts;
 
-    public EthereumAccount(String address, BigDecimal balance, List<SmartContractAccount> smartContractAccounts) {
+    public EthereumAccount(String address, BigDecimal mainBalance, BigDecimal smartContractBalance, List<SmartContractAccount> smartContractAccounts) {
         this.address = address;
-        this.balance = balance;
+        this.balance = mainBalance;
+        this.smartContractBalance = smartContractBalance;
         this.smartContractAccounts = smartContractAccounts;
     }
 
@@ -20,6 +22,10 @@ public class EthereumAccount {
 
     public BigDecimal getBalance() {
         return balance;
+    }
+
+    public BigDecimal getSmartContractBalance() {
+        return smartContractBalance;
     }
 
     public List<SmartContractAccount> getSmartContractAccounts() {

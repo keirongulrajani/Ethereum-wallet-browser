@@ -27,7 +27,7 @@ object Versions {
     const val jetbrainsAnnotations = "17.0.0"
 
     // Unit Testing
-    const val robolectric = "3.8"
+    const val robolectric = "4.3"
     const val junit = "4.12"
     const val mockito = "2.24.5"
     const val mockitoKotlin = "1.6.0"

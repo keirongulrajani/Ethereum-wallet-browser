@@ -14,6 +14,18 @@ public class MainViewState {
         this.mainUiModel = mainUiModel;
     }
 
+    public boolean isLoading() {
+        return loading;
+    }
+
+    public Error getError() {
+        return error;
+    }
+
+    public MainUiModel getMainUiModel() {
+        return mainUiModel;
+    }
+
     public static class Error {
         public static Error NONE = new Error();
 
