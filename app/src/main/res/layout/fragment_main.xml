@@ -1,28 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addressInputLayout"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addressInputText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/address_input_hint"
+            android:maxLines="1"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.keiron.eth.smartcontracttest.view.LoadingView
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-            android:id="@+id/errorText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="No error"
-    />
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No error"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/container"
-                                                       android:layout_width="match_parent"
-                                                       android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_marginTop="@dimen/large_margin"
+        app:layout_constraintTop_toBottomOf="@+id/addressInputLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <TextView
+            android:id="@+id/accountBalanceTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:gravity="center"
+            android:text="@string/account_balance"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="@+id/container"
+            app:layout_constraintRight_toRightOf="@+id/container"
+            app:layout_constraintTop_toTopOf="@+id/container" />
+
+        <TextView
+            android:id="@+id/accountBalanceValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:gravity="center"
+            android:textSize="28sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accountBalanceTitle"
+            tools:text="3.6 ETH" />
+
+        <TextView
+            android:id="@+id/tokenBalanceTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:gravity="center"
+            android:text="@string/erc20_tokens_balance_title"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/tokenBalanceValue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tokenBalanceValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:gravity="center"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/viewMoreButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="3.6 ETH" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/viewMoreButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin"
+            android:text="@string/view_more"
+            android:textSize="20sp"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

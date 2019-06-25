@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ETH smart contract test</string>
+    <string name="address_input_hint">Ethereum wallet address</string>
     <string name="erc20_tokens_details_title">ERC-20 Tokens</string>
+    <string name="erc20_tokens_balance_title">ERC-20 Balance</string>
+    <string name="account_balance">Account Balance</string>
+    <string name="view_more">view more</string>
+    <string name="eth_balance_format">%s ETH</string>
 </resources>

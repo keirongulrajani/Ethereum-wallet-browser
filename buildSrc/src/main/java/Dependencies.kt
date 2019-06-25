@@ -12,7 +12,7 @@ object Versions {
     const val appCompat = "1.1.0-alpha04"
     const val androidx = "1.1.0-alpha04"
     const val androidxKtx = "1.1.0-alpha05"
-    const val design = "1.0.0-rc01"
+    const val design = "1.1.0-alpha06"
     const val cardview = "1.0.0"
     const val multiDex = "2.0.0"
     const val constraintLayout = "1.1.3"
