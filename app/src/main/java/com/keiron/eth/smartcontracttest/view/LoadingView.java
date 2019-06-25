@@ -3,8 +3,11 @@ package com.keiron.eth.smartcontracttest.view;
 import android.content.Context;
 import android.graphics.ColorFilter;
 import android.util.AttributeSet;
+
 import androidx.core.content.ContextCompat;
+
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieDrawable;
 import com.airbnb.lottie.LottieProperty;
 import com.airbnb.lottie.SimpleColorFilter;
 import com.airbnb.lottie.model.KeyPath;
@@ -35,6 +38,7 @@ public class LoadingView extends LottieAnimationView {
         addValueCallback(keyPath, LottieProperty.COLOR_FILTER, callback);
 
         setAnimation(R.raw.loader_anim);
+        setRepeatCount(LottieDrawable.INFINITE);
         playAnimation();
     }
 }
