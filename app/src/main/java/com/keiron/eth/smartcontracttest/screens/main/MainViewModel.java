@@ -48,7 +48,7 @@ public class MainViewModel extends BaseViewModel {
     }
 
     private MainViewState createErrorState(Throwable throwable) {
-        return new MainViewState(false, new MainViewState.Error.NetworkIssue("Error fetching posts: $throwable"), null);
+        return new MainViewState(false, new MainViewState.Error.NetworkIssue("Error fetching posts: " + throwable), null);
     }
 
     private MainViewState createDataState(MainUiModel uiModel) {
